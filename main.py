@@ -3,6 +3,7 @@ from coffee_maker import CoffeeMaker
 from money_machine import MoneyMachine
 
 money_machine = MoneyMachine()
+coffee_maker = CoffeeMaker()
 # latte = MenuItem()
 # espresso = MenuItem()
 # cappuccino = MenuItem()
@@ -32,6 +33,7 @@ is_on = True
 
 # print(latte.name)
 
+
 def turn_off():
   global is_on
   print("Turning off... Goodbye. 😴")
@@ -41,9 +43,10 @@ def order():
 
 def prompt():
   user_input = input("What would you like? (espresso/latte/cappuccino) ☕: ")
-  if user_input == MenuItem():
+  if user_input == "MenuItem()":
     order()
   elif user_input == "report":
+    coffee_maker.report()
     money_machine.report()
   elif user_input == "off":
     turn_off()
