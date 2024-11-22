@@ -4,52 +4,23 @@ from money_machine import MoneyMachine
 
 money_machine = MoneyMachine()
 coffee_maker = CoffeeMaker()
-# latte = MenuItem()
-# espresso = MenuItem()
-# cappuccino = MenuItem()
+menu = Menu()
 
 is_on = True
 
-# money_report = money_machine.report()
-# pay = money_machine.make_payment(2)
-
-# latte.name = "latte"
-# latte.ingredients.water = 200
-# latte.ingredients.milk = 150
-# latte.ingredients.coffee = 24
-# latte.cost = 2.5
-
-# espresso.name = "espresso"
-# espresso.water = 50
-# espresso.milk = 0
-# espresso.coffee = 18
-# espresso.cost = 1.5
-
-# cappuccino.name = "cappuccino"
-# cappuccino.water = 250
-# cappuccino.milk = 50
-# cappuccino.coffee = 24
-# cappuccino.cost = 3
-
-# print(latte.name)
-
-
-def turn_off():
-  global is_on
-  print("Turning off... Goodbye. 😴")
-  is_on = False
-def order():
-  return True
-
-def prompt():
-  user_input = input("What would you like? (espresso/latte/cappuccino) ☕: ")
-  if user_input == "MenuItem()":
-    order()
+while is_on:
+  options = menu.get_items()
+  user_input = input(f"What would you like? ({options}) ☕: ")
+  if user_input == "off":
+    print("Turning off... Goodbye. 😴")
+    is_on = False
   elif user_input == "report":
     coffee_maker.report()
     money_machine.report()
-  elif user_input == "off":
-    turn_off()
-
-while is_on == True:
-  prompt()
+  else:
+    drink = menu.find_drink(user_input)
+    if drink:
+      if coffee_maker.is_resource_sufficient(drink):
+        print(f"That will be ${format(drink.cost, '.2f')}.")
+        if money_machine.make_payment(drink.cost):
+          coffee_maker.make_coffee(drink)
